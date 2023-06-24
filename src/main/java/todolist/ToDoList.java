@@ -2,6 +2,7 @@ package todolist;
 
 import todolist.domain.Task;
 import todolist.service.TaskService;
+import todolist.service.TaskServiceImpl;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -63,7 +64,7 @@ public class ToDoList {
 
     private void save() {
         try {
-            taskService.saveToJson();
+            taskService.save();
         } catch (IOException e) {
             System.err.println("Помилка збереження в файл:" + e.getMessage());
         }
@@ -71,7 +72,7 @@ public class ToDoList {
 
     private void load() {
         try {
-            taskService.loadFromJson();
+            taskService.load();
         } catch (IOException e) {
             System.err.println("Помилка завантаження із файла:" + e.getMessage());
         }
