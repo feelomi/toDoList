@@ -1,17 +1,11 @@
 package todolist.service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import todolist.domain.Task;
-import todolist.gson.LocalDateAdapter;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,6 +13,8 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
     private final static String JSON_FILE = "saved-todo.json";
 
+    private final FileService fileService = new FileService(JSON_FILE);
+    private final JsonSerializer serializer = new JsonSerializer();
     private final List<Task> taskList = new ArrayList<>();
     private int idSequence = 0;
 
@@ -86,25 +82,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void save() throws IOException {
-        Gson gson = createGson();
-        String json = gson.toJson(taskList);
-        Files.writeString(Path.of(JSON_FILE), json);
+        String json = serializer.toJson(taskList);
+        fileService.writeToFile(json);
     }
 
     @Override
     public void load() throws IOException {
-        String content = Files.readString(Path.of(JSON_FILE));
-        Gson gson = createGson();
-        Type listOfTasks = new TypeToken<ArrayList<Task>>() {}.getType();
-        List<Task> loadedTasks = gson.fromJson(content, listOfTasks);
+        String content = fileService.readFromFile();
         taskList.clear();
+        Collection<Task> loadedTasks = serializer.fromJson(content);
         taskList.addAll(loadedTasks);
         idSequence = taskList.size();
-    }
-
-    private static Gson createGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe());
-        return gsonBuilder.create();
     }
 }
