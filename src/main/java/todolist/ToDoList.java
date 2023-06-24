@@ -147,7 +147,7 @@ public class ToDoList {
 
 
     private void read() {
-        List<Task> taskList = taskService.getTaskList();
+        List<Task> taskList = taskService.getTaskList(Comparator.comparing(Task::getId));
         printTaskList(taskList);
     }
 
@@ -160,11 +160,15 @@ public class ToDoList {
                 """;
         System.out.println(text);
         String action = in.nextLine();
-        List<Task> taskList = taskService.getTaskList();
+        List<Task> taskList;
 
         switch (action) {
-            case "1" -> taskList.sort(Comparator.comparing(Task::getDueDate));
-            case "2" -> taskList.sort(Comparator.comparing(Task::isDone));
+            case "1" -> taskList = taskService.getTaskList(Comparator.comparing(Task::getDueDate));
+            case "2" -> taskList = taskService.getTaskList(Comparator.comparing(Task::isDone));
+            default -> {
+                System.out.println("Неправильно введена цифра.");
+                return;
+            }
         }
 
          printTaskList(taskList);

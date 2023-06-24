@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -64,8 +65,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getTaskList() {
-        return taskList;
+    public List<Task> getTaskList(Comparator<Task> sorting) {
+        List<Task> sortedTaskList = new ArrayList<>(taskList);
+        sortedTaskList.sort(sorting);
+        return sortedTaskList;
     }
 
     @Override
