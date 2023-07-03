@@ -1,6 +1,6 @@
-package todolist.service;
+package todolist.domain.service;
 
-import todolist.domain.Task;
+import todolist.domain.data.Task;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,7 +12,6 @@ import java.util.List;
 
 public class TaskServiceImpl implements TaskService {
     private final static String JSON_FILE = "saved-todo.json";
-
     private final FileService fileService = new FileService(JSON_FILE);
     private final JsonSerializer serializer = new JsonSerializer();
     private final List<Task> taskList = new ArrayList<>();

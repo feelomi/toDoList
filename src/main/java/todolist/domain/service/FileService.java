@@ -1,4 +1,4 @@
-package todolist.service;
+package todolist.domain.service;
 
 import java.io.IOException;
 import java.nio.file.Files;

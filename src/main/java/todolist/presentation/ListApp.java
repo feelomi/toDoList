@@ -1,6 +1,6 @@
-package todolist;
+package todolist.presentation;
 
-import todolist.service.TaskServiceImpl;
+import todolist.domain.service.TaskServiceImpl;
 
 public class ListApp {
     public static void main(String[] args) {

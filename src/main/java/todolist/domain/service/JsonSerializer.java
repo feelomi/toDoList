@@ -1,10 +1,10 @@
-package todolist.service;
+package todolist.domain.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import todolist.domain.Task;
-import todolist.gson.LocalDateAdapter;
+import todolist.domain.data.Task;
+import todolist.domain.gson.LocalDateAdapter;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;

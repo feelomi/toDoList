@@ -1,4 +1,4 @@
-package todolist.domain;
+package todolist.domain.data;
 
 import java.time.LocalDate;
 

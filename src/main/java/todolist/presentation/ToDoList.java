@@ -1,8 +1,7 @@
-package todolist;
+package todolist.presentation;
 
-import todolist.domain.Task;
-import todolist.service.TaskService;
-import todolist.service.TaskServiceImpl;
+import todolist.domain.data.Task;
+import todolist.domain.service.TaskService;
 
 import java.io.IOException;
 import java.time.LocalDate;

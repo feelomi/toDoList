@@ -1,4 +1,4 @@
-package todolist.gson;
+package todolist.domain.gson;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
